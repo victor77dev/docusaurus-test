@@ -20,7 +20,7 @@ exec('docusaurus build', (error, stdout, stderr) => {
 
   ghPages.clean();
   ghPages.publish(
-    'public',
+    'build',
     {
       user: {
         name: process.env.GITHUB_ACTOR,
