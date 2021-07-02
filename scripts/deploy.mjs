@@ -18,6 +18,8 @@ exec('docusaurus build', (error, stdout, stderr) => {
 
   console.log(stdout);
 
+  console.log('Start ghPages!');
+
   ghPages.clean();
   ghPages.publish(
     'build',
