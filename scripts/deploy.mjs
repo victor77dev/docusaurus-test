@@ -28,7 +28,7 @@ exec('docusaurus build', (error, stdout, stderr) => {
       },
       repo: `https://x-access-token:${process.env.GITHUB_TOKEN}@github.com/${process.env.GITHUB_REPOSITORY}.git`,
       branch: 'gh-pages',
-//       dest: deployEnv,
+      dest: 'preview',
       message: `Build from ${branch} ${process.env.GITHUB_SHA}`,
     },
     (error) => {
