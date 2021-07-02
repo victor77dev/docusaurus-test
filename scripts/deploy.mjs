@@ -19,6 +19,9 @@ exec('docusaurus build', (error, stdout, stderr) => {
   console.log(stdout);
 
   console.log('Start ghPages!');
+  exec('ls build', (error, stdout, stderr) => {
+    console.log(stdout)
+  })
 
   ghPages.clean();
   ghPages.publish(
