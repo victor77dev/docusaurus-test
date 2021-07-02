@@ -6,7 +6,7 @@ module.exports = {
   title: 'My Site',
   tagline: 'Dinosaurs are cool',
   url: 'https://victor77dev.github.io',
-  baseUrl: '/docusaurus-test/',
+  baseUrl: '/docusaurus-test/preview',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
