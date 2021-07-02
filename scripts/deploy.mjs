@@ -18,11 +18,6 @@ exec('docusaurus build', (error, stdout, stderr) => {
 
   console.log(stdout);
 
-  console.log('Start ghPages!');
-  exec('ls build', (error, stdout, stderr) => {
-    console.log(stdout)
-  })
-
   ghPages.clean();
   ghPages.publish(
     'build',
@@ -33,7 +28,7 @@ exec('docusaurus build', (error, stdout, stderr) => {
       },
       repo: `https://x-access-token:${process.env.GITHUB_TOKEN}@github.com/${process.env.GITHUB_REPOSITORY}.git`,
       branch: 'gh-pages',
-      dest: deployEnv,
+//       dest: deployEnv,
       message: `Build from ${branch} ${process.env.GITHUB_SHA}`,
     },
     (error) => {
