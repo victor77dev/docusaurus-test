@@ -3,7 +3,7 @@ import * as ghPages from 'gh-pages';
 
 const branch = process.env.GITHUB_REF.replace('refs/heads/', '');
 const deployEnv = branch.match(
-  /^main|^release|^production|^hotfix|^lab-\d+/
+  /^master|^release|^production|^hotfix|^lab-\d+/
 )?.[0];
 const [_, repo] = process.env.GITHUB_REPOSITORY.split('/');
 
