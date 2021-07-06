@@ -74,7 +74,7 @@ function deploy() {
 
       console.log(stdout);
 
-      publishGhPages(github, 'build', 'preview', message, {remove: '${prNumber}/*'});
+      publishGhPages(github, 'build', 'preview', message, {remove: `${prNumber}/*`});
     });
   } else {
     const message = `Build from #${prNumber}: ${prTitle} (${commit}) to path: ${path}`;
