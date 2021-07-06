@@ -60,7 +60,7 @@ jobs:
       id: debug
       run: echo "${{ github.head_ref }}"
     - run: echo "${{ github.event.pull_request.number }}"
-    - run: echo "${{ github.event.pull_request.pull_request }}""
+    - run: echo "${{ toJson(github.event.pull_request) }}""
 
   Clean-Preivew:
     if: |
