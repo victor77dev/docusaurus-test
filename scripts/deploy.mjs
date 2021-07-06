@@ -1,7 +1,7 @@
 import { exec } from 'child_process';
 import * as ghPages from 'gh-pages';
 
-const sha = process.env.GITHUB_SHA;
+const commit = process.env.GITHUB_COMMIT;
 const prNumber = process.env.GITHUB_PR_NUMBER;
 const prTitle = process.env.GITHUB_PR_TITLE;
 
@@ -12,7 +12,7 @@ const deployEnv = branch.match(
 const [_, repo] = process.env.GITHUB_REPOSITORY.split('/');
 
 process.env.PATH_PREFIX = `${repo}/${deployEnv}`;
-console.log(`SHA: ${sha}`)
+console.log(`Commit: ${commit}`)
 console.log(`PR number: ${prNumber}`)
 console.log(`PR title: ${prTitle}`)
 
