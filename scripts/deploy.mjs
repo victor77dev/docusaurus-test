@@ -1,8 +1,6 @@
 import { exec } from 'child_process';
 import * as ghPages from 'gh-pages';
 
-const baseUrl = 'https://victor77dev.github.io/docusaurus-test';
-
 /**
  * @typedef  {Object} Github
  * @prop {string} actor
@@ -53,11 +51,12 @@ function deploy() {
   const commit = process.env.GITHUB_COMMIT;
   const prNumber = process.env.GITHUB_PR_NUMBER;
   const prTitle = process.env.GITHUB_PR_TITLE;
+  const [organization, repo] = process.env.GITHUB_REPOSITORY.split('/');
 
   const preview = process.env.PREVIEW;
 
+  const baseUrl = `https://${organization}.github.io/${repo}`;
   const path = preview ? `preview/${prNumber}` : '';
-
   const url = `${baseUrl}/${path}`;
 
   const github = {
