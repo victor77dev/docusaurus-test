@@ -58,7 +58,14 @@ function deploy() {
 
   if (preview === 'CLEAN') {
     const message = `Clean preview #${prNumber}: ${prTitle} (${commit}) to path: ${path}`;
-    publishGhPages(github, path, message);
+    exec('mkdir build', (error, stdout, stderr) => {
+      if (error || stderr) {
+        console.error(error);
+        process.exit(1);
+      }
+
+      publishGhPages(github, path, message);
+    });
   } else {
     const message = `Build from #${prNumber}: ${prTitle} (${commit}) to path: ${path}`;
     exec('docusaurus build', (error, stdout, stderr) => {
