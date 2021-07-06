@@ -59,8 +59,8 @@ jobs:
     - name: Debug
       id: debug
       run: echo "${{ github.head_ref }}"
-    - run: echo "${{ github.ref }}"
-    - run: echo "${{ github }}"
+    - run: echo "${{ github.event.pull_request.number }}"
+    - run: echo "${{ github.event.pull_request.pull_request }}""
 
   Clean-Preivew:
     if: |
