@@ -91,4 +91,6 @@ function deploy() {
   }
 }
 
+
+console.log('REPO: ', process.env.GITHUB_REPOSITORY)
 deploy();
