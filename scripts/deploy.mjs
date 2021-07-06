@@ -1,6 +1,8 @@
 import { exec } from 'child_process';
 import * as ghPages from 'gh-pages';
 
+const baseUrl = 'https://victor77dev.github.io/docusaurus-test';
+
 /**
  * @typedef  {Object} Github
  * @prop {string} actor
@@ -56,6 +58,7 @@ function deploy() {
 
   const path = preview ? `preview/${prNumber}` : '';
 
+  const url = `${baseUrl}/${path}`;
 
   const github = {
     actor: process.env.GITHUB_ACTOR,
@@ -65,7 +68,7 @@ function deploy() {
   }
 
   if (preview === 'CLEAN') {
-    const message = `Clean preview #${prNumber}: ${prTitle} (${commit}) to path: ${path}`;
+    const message = `Clean preview #${prNumber}: ${prTitle} (${commit}) to url: ${url}`;
     exec('mkdir build && touch build/index.html', (error, stdout, stderr) => {
       if (error || stderr) {
         console.error(error);
@@ -77,7 +80,7 @@ function deploy() {
       publishGhPages(github, 'build', 'preview', message, {remove: `${prNumber}/*`});
     });
   } else {
-    const message = `Build from #${prNumber}: ${prTitle} (${commit}) to path: ${path}`;
+    const message = `Build from #${prNumber}: ${prTitle} (${commit}) to url: ${url}`;
     exec('docusaurus build', (error, stdout, stderr) => {
       if (error || stderr) {
         console.error(error);
