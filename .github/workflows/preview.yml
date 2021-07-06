@@ -1,7 +1,16 @@
-name: Deploy
+name: Deploy Preview
 
 on:
-  push:
+  pull_request:
+    types: [
+      closed,
+      labeled,
+      opened,
+      ready_for_review,
+      reopened,
+      synchronize,
+      unlabeled,
+    ]
     branches:
       - master
 
@@ -11,7 +20,13 @@ env:
   GITHUB_ACTOR_EMAIL: ${{ github.event.head_commit.committer.email }}
 
 jobs:
-  Deploy:
+  Deploy-Preivew:
+    if: |
+      github.event.pull_request.draft == false ||
+      (
+        github.event.action == 'labeled' &&
+        contains(github.event.pull_request.labels.*.name, '')
+      )
     runs-on: ubuntu-latest
 
     steps:
@@ -36,3 +51,13 @@ jobs:
     
     - run: yarn install
     - run: yarn deploy
+
+  Clean-Preivew:
+    if: |
+      github.event.action == 'closed'
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Clean up
+      id: clean-up
+      run: echo "Clean up!!!!!!!!!!!!!"
