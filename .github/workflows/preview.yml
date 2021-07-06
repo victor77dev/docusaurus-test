@@ -23,10 +23,7 @@ jobs:
   Deploy-Preivew:
     if: |
       github.event.pull_request.draft == false ||
-      (
-        github.event.action == 'labeled' &&
-        contains(github.event.pull_request.labels.*.name, 'deploy-preview')
-      )
+      contains(github.event.pull_request.labels.*.name, 'deploy-preview')
     runs-on: ubuntu-latest
 
     steps:
