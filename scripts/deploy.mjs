@@ -10,14 +10,20 @@ import * as ghPages from 'gh-pages';
  */
 
 /**
+ * @typedef  {Object} Remove
+ * @prop {string} remove
+ */
+
+/**
  * Publish Github Pages
  * 
  * @param github {Github}
  * @param src {string}
  * @param dest {string}
  * @param message {string}
+ * @param [remove] {Remove}
  */
-function publishGhPages(github, src, dest, message) {
+function publishGhPages(github, src, dest, message, remove) {
   ghPages.clean();
   ghPages.publish(
     src,
@@ -30,7 +36,7 @@ function publishGhPages(github, src, dest, message) {
       branch: 'gh-pages',
       dest,
       message,
-      remove: "aaa.json",
+      ...remove,
     },
     (error) => {
       if (error) {
@@ -60,7 +66,7 @@ function deploy() {
 
   if (preview === 'CLEAN') {
     const message = `Clean preview #${prNumber}: ${prTitle} (${commit}) to path: ${path}`;
-    exec('mkdir build && touch build/aaa.json', (error, stdout, stderr) => {
+    exec('mkdir build && touch build/index.html', (error, stdout, stderr) => {
       if (error || stderr) {
         console.error(error);
         process.exit(1);
@@ -68,7 +74,7 @@ function deploy() {
 
       console.log(stdout);
 
-      publishGhPages(github, 'build', path, message);
+      publishGhPages(github, 'build', 'preview', message, {remove: '${prNumber}/*'});
     });
   } else {
     const message = `Build from #${prNumber}: ${prTitle} (${commit}) to path: ${path}`;
