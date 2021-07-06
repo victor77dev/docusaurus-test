@@ -58,7 +58,7 @@ function deploy() {
 
   if (preview === 'CLEAN') {
     const message = `Clean preview #${prNumber}: ${prTitle} (${commit}) to path: ${path}`;
-    exec('mkdir build', (error, stdout, stderr) => {
+    exec('mkdir build && touch build/.tmp', (error, stdout, stderr) => {
       if (error || stderr) {
         console.error(error);
         process.exit(1);
