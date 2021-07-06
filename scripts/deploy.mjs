@@ -1,6 +1,5 @@
 import { exec } from 'child_process';
 import * as ghPages from 'gh-pages';
-import { message } from 'vfile-message';
 
 /**
  * @typedef  {Object} Github
