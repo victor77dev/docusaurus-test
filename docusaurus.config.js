@@ -1,12 +1,15 @@
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
+const previewPath = process.env.PREVIEW_PATH;
+const baseUrl = previewPath ? `/docusaurus-test/${previewPath}` : '/docusaurus-test/';
+
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
   title: 'My Site - preview',
   tagline: 'Dinosaurs are cool',
   url: 'https://victor77dev.github.io',
-  baseUrl: '/docusaurus-test/preview/0000/',
+  baseUrl,
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',

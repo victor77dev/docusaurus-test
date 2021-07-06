@@ -4,10 +4,6 @@ on:
   push:
     branches:
       - master
-      - release**
-      - production**
-      - hotfix**
-      - lab-**
 
 env:
   NODE_VERSION: '14.x'
