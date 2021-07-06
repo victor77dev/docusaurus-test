@@ -30,6 +30,7 @@ function publishGhPages(github, src, dest, message) {
       branch: 'gh-pages',
       dest,
       message,
+      remove: "aaa.json",
     },
     (error) => {
       if (error) {
@@ -59,7 +60,7 @@ function deploy() {
 
   if (preview === 'CLEAN') {
     const message = `Clean preview #${prNumber}: ${prTitle} (${commit}) to path: ${path}`;
-    exec('mkdir build && touch build/.tmp', (error, stdout, stderr) => {
+    exec('mkdir build && touch build/aaa.json', (error, stdout, stderr) => {
       if (error || stderr) {
         console.error(error);
         process.exit(1);
