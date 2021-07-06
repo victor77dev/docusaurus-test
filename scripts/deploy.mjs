@@ -13,13 +13,14 @@ import * as ghPages from 'gh-pages';
  * Publish Github Pages
  * 
  * @param github {Github}
- * @param path {string}
+ * @param src {string}
+ * @param dest {string}
  * @param message {string}
  */
-function publishGhPages(github, path, message) {
+function publishGhPages(github, src, dest, message) {
   ghPages.clean();
   ghPages.publish(
-    'build',
+    src,
     {
       user: {
         name: github.actor,
@@ -27,7 +28,7 @@ function publishGhPages(github, path, message) {
       },
       repo: `https://x-access-token:${github.token}@github.com/${github.repo}.git`,
       branch: 'gh-pages',
-      dest: path,
+      dest,
       message,
     },
     (error) => {
@@ -58,13 +59,15 @@ function deploy() {
 
   if (preview === 'CLEAN') {
     const message = `Clean preview #${prNumber}: ${prTitle} (${commit}) to path: ${path}`;
-    exec('mkdir build && touch build/.tmp', (error, stdout, stderr) => {
+    exec('mkdir build && touch build/aaa', (error, stdout, stderr) => {
       if (error || stderr) {
         console.error(error);
         process.exit(1);
       }
 
-      publishGhPages(github, path, message);
+      console.log(stdout);
+
+      publishGhPages(github, 'build', path, message);
     });
   } else {
     const message = `Build from #${prNumber}: ${prTitle} (${commit}) to path: ${path}`;
@@ -76,7 +79,7 @@ function deploy() {
 
       console.log(stdout);
 
-      publishGhPages(github, path, message);
+      publishGhPages(github, 'build',  path, message);
     });
   }
 }
