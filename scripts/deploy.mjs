@@ -2,6 +2,14 @@ import { exec } from 'child_process';
 import * as ghPages from 'gh-pages';
 
 /**
+ * @typedef  {Object} Github
+ * @prop {string} actor
+ * @prop {string} email
+ * @prop {string} token
+ * @prop {string} repo
+ */
+
+/**
  * Publish Github Pages
  * 
  * @param github {Github}
@@ -22,7 +30,6 @@ function publishGhPages(github, src, dest, message) {
       branch: 'gh-pages',
       dest,
       message,
-      ...remove,
     },
     (error) => {
       if (error) {
