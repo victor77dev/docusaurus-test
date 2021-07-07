@@ -72,7 +72,7 @@ function deploy() {
 
     console.log(stdout);
 
-    publishGhPages(github, 'build', ghPath, message);
+    publishGhPages(github, 'build', path, message);
   });
 }
 
