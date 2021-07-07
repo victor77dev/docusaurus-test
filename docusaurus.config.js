@@ -2,7 +2,7 @@ const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 const previewPath = process.env.PREVIEW_PATH;
-const baseUrl = previewPath ? `/docusaurus-test/${previewPath}` : '/docusaurus-test/';
+const baseUrl = previewPath || '/';
 
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 module.exports = {
