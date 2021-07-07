@@ -49,8 +49,9 @@ function deploy() {
   const preview = process.env.PREVIEW;
 
   const baseUrl = `https://${organization}.github.io`;
-  const path = preview ? `${repo}/preview/${prNumber}` : `${repo}`;
-  const url = `${baseUrl}/${path}`;
+  const path = preview ? `/preview/${prNumber}` : '';
+  const previewPath = `${repo}${path}`;
+  const url = `${baseUrl}/${previewPath}`;
 
   const github = {
     actor: process.env.GITHUB_ACTOR,
@@ -63,7 +64,7 @@ function deploy() {
     ? `Build from #${prNumber}: ${prTitle} (${commit}) to url: ${url}`
     : `Build to url: ${url}`;
 
-  exec(`PREVIEW_PATH=/${path}/ docusaurus build`, (error, stdout, stderr) => {
+  exec(`PREVIEW_PATH=/${previewPath}/ docusaurus build`, (error, stdout, stderr) => {
     if (error || stderr) {
       console.error(error);
       process.exit(1);
@@ -71,7 +72,7 @@ function deploy() {
 
     console.log(stdout);
 
-    publishGhPages(github, 'build',  path, message);
+    publishGhPages(github, 'build', ghPath, message);
   });
 }
 
