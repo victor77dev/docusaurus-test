@@ -10,20 +10,14 @@ import * as ghPages from 'gh-pages';
  */
 
 /**
- * @typedef  {Object} Remove
- * @prop {string} remove
- */
-
-/**
  * Publish Github Pages
  * 
  * @param github {Github}
  * @param src {string}
  * @param dest {string}
  * @param message {string}
- * @param [remove] {Remove}
  */
-function publishGhPages(github, src, dest, message, remove) {
+function publishGhPages(github, src, dest, message) {
   ghPages.clean();
   ghPages.publish(
     src,
@@ -66,33 +60,20 @@ function deploy() {
     repo: process.env.GITHUB_REPOSITORY,
   }
 
-  if (preview === 'CLEAN') {
-    const message = `Clean preview #${prNumber}: ${prTitle} (${commit}) to url: ${url}`;
-    exec('mkdir build && touch build/index.html', (error, stdout, stderr) => {
-      if (error || stderr) {
-        console.error(error);
-        process.exit(1);
-      }
+  const message = preview
+    ? `Build from #${prNumber}: ${prTitle} (${commit}) to url: ${url}`
+    : `Build to url: ${url}`;
 
-      console.log(stdout);
+  exec('docusaurus build', (error, stdout, stderr) => {
+    if (error || stderr) {
+      console.error(error);
+      process.exit(1);
+    }
 
-      publishGhPages(github, 'build', 'preview', message, {remove: `${prNumber}/*`});
-    });
-  } else {
-    const message = `Build from #${prNumber}: ${prTitle} (${commit}) to url: ${url}`;
-    exec('docusaurus build', (error, stdout, stderr) => {
-      if (error || stderr) {
-        console.error(error);
-        process.exit(1);
-      }
+    console.log(stdout);
 
-      console.log(stdout);
-
-      publishGhPages(github, 'build',  path, message);
-    });
-  }
+    publishGhPages(github, 'build',  path, message);
+  });
 }
 
-
-console.log('REPO: ', process.env.GITHUB_REPOSITORY)
 deploy();
