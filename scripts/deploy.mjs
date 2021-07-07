@@ -63,7 +63,9 @@ function deploy() {
     ? `Build from #${prNumber}: ${prTitle} (${commit}) to url: ${url}`
     : `Build to url: ${url}`;
 
-  exec('docusaurus build', (error, stdout, stderr) => {
+  const previewPath = preview ? `${repo}/${path}` : repo;
+
+  exec(`PREVIEW_PATH=/${previewPath}/ docusaurus build`, (error, stdout, stderr) => {
     if (error || stderr) {
       console.error(error);
       process.exit(1);
@@ -71,7 +73,7 @@ function deploy() {
 
     console.log(stdout);
 
-    publishGhPages(github, 'build',  path, message);
+    publishGhPages(github, 'build', path, message);
   });
 }
 
