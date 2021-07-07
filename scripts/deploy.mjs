@@ -63,7 +63,7 @@ function deploy() {
     ? `Build from #${prNumber}: ${prTitle} (${commit}) to url: ${url}`
     : `Build to url: ${url}`;
 
-  exec(`PREVIEW_PATH=${path}/ docusaurus build`, (error, stdout, stderr) => {
+  exec(`PREVIEW_PATH=/${path}/ docusaurus build`, (error, stdout, stderr) => {
     if (error || stderr) {
       console.error(error);
       process.exit(1);
