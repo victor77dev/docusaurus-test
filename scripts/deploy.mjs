@@ -76,3 +76,12 @@ function deploy() {
 }
 
 deploy();
+
+/**
+ * @typedef  {Object} Github
+ * @prop {string} actor
+ * @prop {string} email
+ * @prop {string} token
+ * @prop {string} repo
+ */
+
