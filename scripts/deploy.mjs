@@ -30,7 +30,6 @@ function publishGhPages(github, src, dest, message) {
       branch: 'gh-pages',
       dest,
       message,
-      ...remove,
     },
     (error) => {
       if (error) {
